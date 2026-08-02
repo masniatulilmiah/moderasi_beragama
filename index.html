@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bahan Ajar Interaktif Moderasi Beragama</title>
+ 
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+ 
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+ 
+    <style>
+        :root {
+            --ink: #1c332e;
+            --teal: #0e6659;
+            --teal-deep: #0a4a41;
+            --maroon: #8a3a2b;
+            --gold: #bf8a28;
+            --sand: #f4efdf;
+            --sand-deep: #e9dfc0;
+            --paper: #faf7ec;
+        }
+ 
+        html { scroll-behavior: smooth; }
+ 
+        body {
+            margin: 0;
+            font-family: "Inter", sans-serif;
+            color: var(--ink);
+            background: var(--paper);
+            overflow-x: hidden;
+        }
+ 
+        .display-font { font-family: "Amiri", serif; }
+ 
+        /* geometric star texture, drawn from the eight-point rub-el-hizb motif */
+        .star-field {
+            background-color: var(--sand);
+            background-image: radial-gradient(circle at 1px 1px, rgba(14,102,89,0.16) 1.4px, transparent 1.4px);
+            background-size: 26px 26px;
+        }
+ 
+        .divider-motif {
+            height: 3px;
+            background: repeating-linear-gradient(90deg, var(--gold) 0 10px, transparent 10px 20px);
+            opacity: 0.7;
+        }
+ 
+        .reveal {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.in-view { opacity: 1; transform: translateY(0); }
+ 
+        .lesson-card {
+            box-shadow: 0 10px 24px rgba(28,51,46,0.10);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .lesson-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 30px rgba(28,51,46,0.16);
+        }
+ 
+        .quiz-option { transition: all 0.2s ease; }
+        .quiz-option:hover { border-color: var(--teal); background: #f1f8f4; }
+        .quiz-option:has(input:checked) { border-color: var(--teal); background: #e3f0e6; }
+        input[type="radio"] { accent-color: var(--teal); }
+ 
+        :focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+ 
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { transition: none; opacity: 1; transform: none; }
+            #beam { transition: none !important; }
+        }
+    </style>
+</head>
+ 
+<body>
+ 
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
+    <header class="sticky top-0 z-30 border-b border-white/10" style="background: var(--teal-deep);">
+        <nav class="max-w-6xl mx-auto px-5 py-3 flex items-center justify-between gap-4" aria-label="Navigasi utama">
+            <a href="#beranda" class="flex items-center gap-2">
+                <span class="w-9 h-9 rounded-full grid place-items-center" style="background: var(--gold); color: var(--teal-deep);">
+                    <img src="img/logogandhi.jpg" alt="Logo Belajar PAI" class="w-full h-full object-contain rounded-full">
+                </span>
+                <span class="font-bold text-white text-base display-font">SMK Gandhi Usada Bali</span>
+            </a>
+ 
+            <div class="hidden lg:flex items-center gap-5 text-sm font-semibold">
+                <a href="#beranda" class="text-white/90 hover:text-[var(--gold)] transition">Beranda</a>
+                <a href="#materi" class="text-white/90 hover:text-[var(--gold)] transition">Materi</a>
+                <a href="#aktivitas" class="text-white/90 hover:text-[var(--gold)] transition">Aktivitas</a>
+                <a href="#evaluasi" class="text-white/90 hover:text-[var(--gold)] transition">Evaluasi</a>
+                <a href="#kesimpulan" class="text-white/90 hover:text-[var(--gold)] transition">Kesimpulan</a>
+            </div>
+ 
+            <a href="#materi" class="rounded-full px-4 py-2 text-sm font-bold hover:-translate-y-0.5 transition" style="background: var(--gold); color: white;">
+                Kenali Lebih Lanjut...            
+            </a>
+        </nav>
+    </header>
+ 
+    <main>
+ 
+        <!-- =====================================================
+             HERO
+        ====================================================== -->
+        <section id="beranda" class="star-field relative overflow-hidden">
+            <div class="max-w-6xl mx-auto px-5 py-14 md:py-20 grid md:grid-cols-[1.05fr_.95fr] gap-10 items-center">
+ 
+                <div class="relative z-10 reveal">
+                    <p class="display-font italic mb-2" style="color: var(--teal);">Assalamu’alaikum warahmatullahi wabarakatuh</p>
+                    <h1 class="display-font font-bold leading-tight mb-4 text-4xl md:text-5xl" style="color: var(--ink);">
+                        Moderasi Beragama
+                    </h1>
+                    <p class="leading-relaxed max-w-xl mb-5 text-lg" style="color: var(--ink); opacity: 0.85;">
+                        Mari memahami moderasi beragama melalui toleransi, menghargai perbedaan, dan menjaga kerukunan dalam kehidupan sehari-hari.
+                    </p>
+                    <div class="rounded-xl px-4 py-3 max-w-lg mb-6 text-sm font-semibold bg-white" style="color: var(--teal-deep); border-left: 4px solid var(--gold);">
+                        "Untukmu agamamu, dan untukku agamaku." — Q.S. Al-Kāfirūn: 6
+                    </div>
+                    <a href="#materi" class="inline-flex items-center gap-2 rounded-full px-5 py-3 font-bold shadow-lg transition hover:-translate-y-1 text-white" style="background: var(--teal);">
+                        Kenali Lebih Lanjut...
+                    </a>
+                </div>
+ 
+                <!-- Signature element: the balance beam, embodying wasathiyah -->
+                <div class="relative reveal" style="transition-delay: 0.15s;">
+                    <svg viewBox="0 0 360 300" class="w-full h-auto" role="img" aria-label="Ilustrasi timbangan yang seimbang, melambangkan sikap toleransi dan keseimbangan dalam keberagaman">
+                        <defs>
+                            <pattern id="starpat" width="24" height="24" patternUnits="userSpaceOnUse">
+                                <circle cx="1.2" cy="1.2" r="1.2" fill="rgba(14,102,89,0.18)"/>
+                            </pattern>
+                        </defs>
+                        <rect x="0" y="0" width="360" height="300" fill="url(#starpat)" opacity="0.5"/>
+ 
+                        <!-- post -->
+                        <rect x="176" y="60" width="8" height="170" rx="3" fill="var(--teal-deep)"/>
+                        <polygon points="140,232 220,232 210,250 150,250" fill="var(--teal-deep)"/>
+ 
+                        <!-- beam, gently animated -->
+                        <g id="beam" style="transform-origin: 180px 66px; transition: transform 3s ease-in-out;">
+                            <rect x="40" y="62" width="280" height="7" rx="3" fill="var(--gold)"/>
+                            <circle cx="180" cy="65" r="10" fill="var(--maroon)"/>
+ 
+                            <!-- left pan -->
+                            <line x1="55" y1="66" x2="55" y2="120" stroke="var(--teal-deep)" stroke-width="2.5"/>
+                            <line x1="55" y1="120" x2="20" y2="120" stroke="var(--teal-deep)" stroke-width="2.5"/>
+                            <line x1="55" y1="120" x2="90" y2="120" stroke="var(--teal-deep)" stroke-width="2.5"/>
+                            <path d="M15 120 Q55 155 95 120" fill="none" stroke="var(--maroon)" stroke-width="3"/>
+ 
+                            <!-- right pan -->
+                            <line x1="305" y1="66" x2="305" y2="120" stroke="var(--teal-deep)" stroke-width="2.5"/>
+                            <line x1="305" y1="120" x2="270" y2="120" stroke="var(--teal-deep)" stroke-width="2.5"/>
+                            <line x1="305" y1="120" x2="340" y2="120" stroke="var(--teal-deep)" stroke-width="2.5"/>
+                            <path d="M265 120 Q305 155 345 120" fill="none" stroke="var(--maroon)" stroke-width="3"/>
+                        </g>
+ 
+                        <text x="180" y="278" text-anchor="middle" class="display-font" font-size="20" font-weight="700" fill="var(--teal)">Toleransi &amp; Keberagaman</text>
+                    </svg>
+                </div>
+ 
+            </div>
+            <div class="divider-motif"></div>
+        </section>
+ 
+        <!-- =====================================================
+             MATERI
+        ====================================================== -->
+        <section id="materi" class="py-16" style="background: var(--paper);">
+            <div class="max-w-6xl mx-auto px-5">
+ 
+                <div class="text-center mb-10 reveal">
+                    <p class="font-bold tracking-widest uppercase mb-1 text-sm" style="color: var(--maroon);">✦ Materi Utama ✦</p>
+                    <h2 class="display-font font-bold text-3xl" style="color: var(--ink);">Materi Pembelajaran</h2>
+                    <p class="mt-2" style="color: var(--ink); opacity: 0.7;">Pelajari tiga materi penting berikut secara berurutan.</p>
+                </div>
+ 
+                <div class="grid md:grid-cols-3 gap-6">
+ 
+                    <article class="lesson-card reveal overflow-hidden rounded-2xl bg-white">
+                        <div class="relative">
+                            <img loading="lazy" class="w-full h-44 object-cover"
+                                src="img/toleransi_beranda.jpg"
+                                alt="Empat teman dari latar belakang beragam bergandengan tangan di luar ruangan">
+                            <span class="absolute top-3 left-3 rounded-full px-3 py-1 text-xs font-bold text-white" style="background: var(--teal);">01</span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-bold mb-2 text-xl display-font" style="color: var(--ink);">Toleransi</h3>
+                            <p class="leading-relaxed mb-4" style="color: var(--ink); opacity: 0.75;">
+                                Toleransi adalah sikap menghargai perbedaan keyakinan, pendapat,
+                                dan kebiasaan tanpa memaksakan kehendak kepada orang lain.
+                            </p>
+                            <a href="materi_toleransi.html" class="inline-block rounded-full px-4 py-2 text-sm font-bold text-white hover:-translate-y-0.5 transition" style="background: var(--teal);">
+                                Pelajari Materi →
+                            </a>
+                        </div>
+                    </article>
+ 
+                    <article class="lesson-card reveal overflow-hidden rounded-2xl bg-white" style="transition-delay: 0.1s;">
+                        <div class="relative">
+                            <img loading="lazy" class="w-full h-44 object-cover"
+                                src="img/yunus_beranda.jpg"
+                                alt="Al-Quran terbuka dengan bayangan dan cahaya hangat">
+                            <span class="absolute top-3 left-3 rounded-full px-3 py-1 text-xs font-bold text-white" style="background: var(--maroon);">02</span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-bold mb-2 text-xl display-font" style="color: var(--ink);">Q.S. Yunus 10:40–41</h3>
+                            <p class="leading-relaxed mb-4" style="color: var(--ink); opacity: 0.75;">
+                                Ayat ini mengajarkan bahwa manusia memiliki pilihan keyakinan.
+                                Kita tetap teguh dalam iman dan menghormati orang yang berbeda.
+                            </p>
+                            <a href="qs.yunus.html" class="inline-block rounded-full px-4 py-2 text-sm font-bold text-white hover:-translate-y-0.5 transition" style="background: var(--maroon);">
+                                Pelajari Materi →
+                            </a>
+                        </div>
+                    </article>
+ 
+                    <article class="lesson-card reveal overflow-hidden rounded-2xl bg-white" style="transition-delay: 0.2s;">
+                        <div class="relative">
+                            <img loading="lazy" class="w-full h-44 object-cover"
+                                src="img/maidah_beranda.jpg"
+                                alt="Al-Quran terbuka di atas rehal dengan kaligrafi Arab">
+                            <span class="absolute top-3 left-3 rounded-full px-3 py-1 text-xs font-bold text-white" style="background: var(--gold);">03</span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-bold mb-2 text-xl display-font" style="color: var(--ink);">Q.S. Al-Mā'idah 5:32</h3>
+                            <p class="leading-relaxed mb-4" style="color: var(--ink); opacity: 0.75;">
+                                Ayat ini menegaskan kemuliaan menjaga kehidupan manusia. Hindari
+                                kekerasan, perundungan, dan tindakan yang merusak kedamaian.
+                            </p>
+                            <a href="qs.maidah.html" class="inline-block rounded-full px-4 py-2 text-sm font-bold hover:-translate-y-0.5 transition" style="background: var(--gold); color: var(--teal-deep);">
+                                Pelajari Materi →
+                            </a>
+                        </div>
+                    </article>
+ 
+                </div>
+            </div>
+        </section>
+ 
+        <section id="aktivitas" class="star-field py-16 relative overflow-hidden">
+
+            <div class="max-w-5xl mx-auto px-5">
+
+                <!-- =========================
+                    BAGIAN ATAS
+                    GAMBAR + AKTIVITAS
+                ========================== -->
+
+                <div class="grid md:grid-cols-[.82fr_1.18fr] gap-8 items-center">
+
+                    <!-- GAMBAR -->
+                    <div class="relative reveal">
+
+                        <div
+                            class="rounded-3xl p-3"
+                            style="background: var(--sand-deep);"
+                        >
+
+                            <img
+                                loading="lazy"
+                                class="rounded-2xl w-full h-72 object-cover"
+                                src="https://images.pexels.com/photos/35362880/pexels-photo-35362880.jpeg"
+                                alt="Tiga siswa berkolaborasi mengerjakan proyek di dalam kelas"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- DESKRIPSI AKTIVITAS -->
+                    <div class="reveal">
+
+                        <p
+                            class="font-bold tracking-widest uppercase mb-2 text-sm"
+                            style="color: var(--maroon);"
+                        >
+                            ✦ Aktivitas ✦
+                        </p>
+
+
+                        <h2
+                            class="display-font font-bold leading-tight mb-3 text-2xl md:text-3xl"
+                            style="color: var(--teal);"
+                        >
+                            Diskusi dengan Sikap Terbuka
+                        </h2>
+
+
+                        <p
+                            class="leading-relaxed mb-5 text-lg"
+                            style="color: var(--ink); opacity: 0.85;"
+                        >
+                            Mari latih sikap toleran melalui diskusi sederhana bersama teman.
+                            Dengarkan pendapat orang lain dengan santun dan berikan tanggapan
+                            tanpa merendahkan.
+                        </p>
+
+
+                        <!-- TUGAS KELOMPOK -->
+                        <div
+                            class="rounded-2xl p-5 bg-white"
+                            style="border-left: 4px solid var(--gold);"
+                        >
+
+                            <h3
+                                class="font-bold mb-2 text-lg display-font"
+                                style="color: var(--teal);"
+                            >
+                                Tugas Kelompok
+                            </h3>
+
+                            <p
+                                class="leading-relaxed"
+                                style="color: var(--ink); opacity: 0.85;"
+                            >
+                                Diskusikan satu contoh perbedaan yang ada di sekolah atau
+                                lingkunganmu. Tuliskan cara menjaga kerukunan dalam situasi tersebut.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                    HASIL AKTIVITAS
+                    LEBAR SAMA DENGAN BAGIAN ATAS
+                ================================================== -->
+
+                <div
+                    class="mt-10 rounded-3xl p-6 md:p-8 bg-white shadow-lg reveal"
+                    style="border-top: 5px solid var(--teal);"
+                >
+
+                    <!-- HEADER FORM -->
+                    <div class="mb-6">
+
+                        <p
+                            class="font-bold tracking-widest uppercase text-xs mb-1"
+                            style="color: var(--maroon);"
+                        >
+                            ✦ Hasil Aktivitas ✦
+                        </p>
+
+                        <h3
+                            class="font-bold text-2xl display-font"
+                            style="color: var(--teal);"
+                        >
+                            Yuk, Kumpulkan Hasil Diskusimu!
+                        </h3>
+
+                        <p
+                            class="mt-1"
+                            style="color: var(--ink); opacity: 0.75;"
+                        >
+                            Isi data berikut sesuai dengan hasil diskusi kelompokmu.
+                        </p>
+
+                    </div>
+
+
+                    <!-- NAMA + KELAS -->
+                    <div class="grid md:grid-cols-2 gap-5">
+
+                        <!-- NAMA -->
+                        <div>
+
+                            <label
+                                for="nama"
+                                class="block font-bold mb-2"
+                                style="color: var(--ink);"
+                            >
+                                Nama Lengkap
+                            </label>
+
+                            <input
+                                type="text"
+                                id="nama"
+                                name="nama"
+                                placeholder="Masukkan nama lengkap"
+                                class="w-full rounded-xl border-2 border-slate-200 px-4 py-3 outline-none transition"
+                            >
+
+                        </div>
+
+
+                        <!-- KELAS -->
+                        <div>
+
+                            <label
+                                for="kelas"
+                                class="block font-bold mb-2"
+                                style="color: var(--ink);"
+                            >
+                                Kelas
+                            </label>
+
+                            <input
+                                type="text"
+                                id="kelas"
+                                name="kelas"
+                                placeholder="Contoh: XI A"
+                                class="w-full rounded-xl border-2 border-slate-200 px-4 py-3 outline-none transition"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- HASIL DISKUSI -->
+                    <div class="mt-5">
+
+                        <label
+                            for="jawaban"
+                            class="block font-bold mb-2"
+                            style="color: var(--ink);"
+                        >
+                            Hasil Diskusi
+                        </label>
+
+                        <textarea
+                            id="jawaban"
+                            name="jawaban"
+                            rows="6"
+                            placeholder="Tuliskan contoh perbedaan yang ada di sekolah atau lingkunganmu dan cara menjaga kerukunan dalam situasi tersebut..."
+                            class="w-full rounded-xl border-2 border-slate-200 px-4 py-3 resize-none outline-none transition"
+                        ></textarea>
+
+                    </div>
+
+
+                    <!-- TOMBOL -->
+                    <div class="mt-5 flex flex-wrap gap-3">
+
+                        <button
+                            type="button"
+                            id="kirim-aktivitas"
+                            class="inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 font-bold text-white hover:-translate-y-0.5 transition"
+                            style="background: var(--teal);"
+                        >
+                            Kirim Hasil Aktivitas
+                        </button>
+
+                        <a
+                            href="#evaluasi"
+                            class="inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 font-bold hover:-translate-y-0.5 transition"
+                            style="background: var(--gold); color: var(--teal);"
+                        >
+                            Lanjut ke Evaluasi →
+                        </a>
+
+                    </div>
+
+
+                    <!-- PESAN BERHASIL -->
+                    <div
+                        id="aktivitas-success"
+                        class="hidden mt-4 rounded-xl p-4 font-bold text-sm"
+                        style="background: #e5f3eb; color: var(--teal);"
+                    >
+                        ✓ Hasil aktivitas berhasil dikirim!
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+ 
+        <!-- =====================================================
+             EVALUASI      
+        ====================================================== --> 
+        <section id="evaluasi" class="py-16" style="background: var(--teal-deep);">
+
+            <!-- JUDUL EVALUASI -->
+            <div class="text-center mb-6 reveal">
+
+                <p
+                    class="font-bold tracking-widest uppercase mb-2 text-sm"
+                    style="color: var(--gold);"
+                >
+                    ✦ Evaluasi ✦
+                </p>
+
+                <h2
+                    class="display-font font-bold text-white text-3xl"
+                >
+                    Kuis Cepat
+                </h2>
+
+                <p class="text-white/80 mt-2">
+                    Yuk, uji pemahamanmu tentang materi toleransi!
+                </p>
+
+            </div>
+
+
+            <!-- CONTAINER KUIS -->
+            <div class="max-w-2xl mx-auto px-5">
+
+                <form
+                    id="quiz-form"
+                    class="rounded-3xl border-2 border-slate-200 p-6 md:p-8 bg-white shadow-2xl"
+                >
+
+
+                    <!-- ==========================================
+                        SOAL 1
+                    =========================================== -->
+
+                    <fieldset class="mb-6">
+
+                        <p
+                            class="font-bold text-xs tracking-wider mb-2"
+                            style="color: var(--maroon)"
+                        >
+                            SOAL 1
+                        </p>
+
+                        <legend
+                            class="font-bold leading-snug mb-3 text-lg"
+                            style="color: var(--ink);"
+                        >
+                            Sikap yang paling tepat untuk menjaga kerukunan antarumat
+                            beragama adalah ...
+                        </legend>
+
+
+                        <label
+                            class="quiz-option flex gap-3 items-start rounded-xl border-2 border-slate-200 p-3 mb-2 cursor-pointer"
+                        >
+                            <input
+                                type="radio"
+                                name="answer1"
+                                value="a"
+                                class="mt-1 shrink-0"
+                            >
+
+                            <span style="color: var(--ink);">
+                                Memaksa orang lain mengikuti keyakinan kita.
+                            </span>
+                        </label>
+
+
+                        <label
+                            class="quiz-option flex gap-3 items-start rounded-xl border-2 border-slate-200 p-3 mb-2 cursor-pointer"
+                        >
+                            <input
+                                type="radio"
+                                name="answer1"
+                                value="b"
+                                class="mt-1 shrink-0"
+                            >
+
+                            <span style="color: var(--ink);">
+                                Menghormati keyakinan dan ibadah orang lain tanpa
+                                meninggalkan keyakinan sendiri.
+                            </span>
+                        </label>
+
+
+                        <label
+                            class="quiz-option flex gap-3 items-start rounded-xl border-2 border-slate-200 p-3 cursor-pointer"
+                        >
+                            <input
+                                type="radio"
+                                name="answer1"
+                                value="c"
+                                class="mt-1 shrink-0"
+                            >
+
+                            <span style="color: var(--ink);">
+                                Menjauhi semua orang yang berbeda pandangan.
+                            </span>
+                        </label>
+
+                    </fieldset>
+
+
+
+                    <!-- ==========================================
+                        SOAL 2
+                    =========================================== -->
+
+                    <fieldset class="mb-6">
+
+                        <p
+                            class="font-bold text-xs tracking-wider mb-2"
+                            style="color: var(--maroon);"
+                        >
+                            SOAL 2
+                        </p>
+
+                        <legend
+                            class="font-bold leading-snug mb-3 text-lg"
+                            style="color: var(--ink);"
+                        >
+                            Contoh perilaku toleransi di lingkungan sekolah adalah ...
+                        </legend>
+
+
+                        <label
+                            class="quiz-option flex gap-3 items-start rounded-xl border-2 border-slate-200 p-3 mb-2 cursor-pointer"
+                        >
+                            <input
+                                type="radio"
+                                name="answer2"
+                                value="a"
+                                class="mt-1 shrink-0"
+                            >
+
+                            <span style="color: var(--ink);">
+                                Memberikan kesempatan teman menjalankan ibadah sesuai
+                                keyakinannya.
+                            </span>
+                        </label>
+
+
+                        <label
+                            class="quiz-option flex gap-3 items-start rounded-xl border-2 border-slate-200 p-3 mb-2 cursor-pointer"
+                        >
+                            <input
+                                type="radio"
+                                name="answer2"
+                                value="b"
+                                class="mt-1 shrink-0"
+                            >
+
+                            <span style="color: var(--ink);">
+                                Mengganggu teman ketika sedang beribadah.
+                            </span>
+                        </label>
+
+
+                        <label
+                            class="quiz-option flex gap-3 items-start rounded-xl border-2 border-slate-200 p-3 cursor-pointer"
+                        >
+                            <input
+                                type="radio"
+                                name="answer2"
+                                value="c"
+                                class="mt-1 shrink-0"
+                            >
+
+                            <span style="color: var(--ink);">
+                                Memaksa teman mengikuti kegiatan keagamaan kita.
+                            </span>
+                        </label>
+
+                    </fieldset>
+
+
+
+                    <!-- ==========================================
+                        SOAL 3
+                    =========================================== -->
+
+                    <fieldset class="mb-6">
+
+                        <p
+                            class="font-bold text-xs tracking-wider mb-2"
+                            style="color: var(--maroon);"
+                        >
+                            SOAL 3
+                        </p>
+
+                        <legend
+                            class="font-bold leading-snug mb-3 text-lg"
+                            style="color: var(--ink);"
+                        >
+                            Sikap toleransi yang sesuai dengan ajaran Islam adalah ...
+                        </legend>
+
+
+                        <label
+                            class="quiz-option flex gap-3 items-start rounded-xl border-2 border-slate-200 p-3 mb-2 cursor-pointer"
+                        >
+                            <input
+                                type="radio"
+                                name="answer3"
+                                value="a"
+                                class="mt-1 shrink-0"
+                            >
+
+                            <span style="color: var(--ink);">
+                                Mengikuti semua keyakinan agar tidak terjadi perbedaan.
+                            </span>
+                        </label>
+
+
+                        <label
+                            class="quiz-option flex gap-3 items-start rounded-xl border-2 border-slate-200 p-3 mb-2 cursor-pointer"
+                        >
+                            <input
+                                type="radio"
+                                name="answer3"
+                                value="b"
+                                class="mt-1 shrink-0"
+                            >
+
+                            <span style="color: var(--ink);">
+                                Menolak berteman dengan orang yang berbeda agama.
+                            </span>
+                        </label>
+
+
+                        <label
+                            class="quiz-option flex gap-3 items-start rounded-xl border-2 border-slate-200 p-3 cursor-pointer"
+                        >
+                            <input
+                                type="radio"
+                                name="answer3"
+                                value="c"
+                                class="mt-1 shrink-0"
+                            >
+
+                            <span style="color: var(--ink);">
+                                Menghargai perbedaan tanpa mencampuradukkan keyakinan.
+                            </span>
+                        </label>
+
+                    </fieldset>
+
+
+
+                    <!-- ==========================================
+                        TOMBOL
+                    =========================================== -->
+
+                    <button
+                        type="submit"
+                        class="w-full rounded-full py-3 font-bold text-white hover:-translate-y-0.5 transition"
+                        style="background: var(--teal);"
+                    >
+                        Periksa Jawaban
+                    </button>
+
+
+
+                    <!-- ==========================================
+                        HASIL BENAR
+                    =========================================== -->
+
+                    <div
+                        id="quiz-correct"
+                        class="hidden mt-5"
+                        aria-live="polite"
+                    >
+
+                        <div
+                            class="rounded-xl p-4 font-bold"
+                            style="background: #dcf3e7; color: var(--teal-deep);"
+                        >
+                            🎉 Hebat! Semua jawabanmu benar.
+                            Kamu sudah memahami konsep toleransi dengan baik.
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ==========================================
+                        HASIL SALAH / BELUM LENGKAP
+                    =========================================== -->
+
+                    <div
+                        id="quiz-wrong"
+                        class="hidden mt-5"
+                        aria-live="polite"
+                    >
+
+                        <div
+                            class="rounded-xl p-4 font-bold mb-3"
+                            style="background: #fbe9e2; color: var(--maroon);"
+                        >
+                            Belum semuanya tepat.
+                            Yuk, periksa kembali jawabanmu lalu coba lagi!
+                        </div>
+
+
+                        <button
+                            type="button"
+                            id="retry-button"
+                            class="rounded-full px-5 py-2 font-bold hover:-translate-y-0.5 transition"
+                            style="background: var(--gold); color: var(--teal-deep);"
+                        >
+                            Coba Lagi
+                        </button>
+
+                    </div>
+
+
+                </form>
+
+            </div>
+
+        </section>
+ 
+        <!-- =====================================================
+             KESIMPULAN
+        ====================================================== -->
+        <section id="kesimpulan" class="star-field py-16 relative overflow-hidden">
+            <div class="max-w-5xl mx-auto px-5 grid md:grid-cols-[1.05fr_.95fr] gap-8 items-center">
+ 
+                <div class="reveal">
+                    <p class="font-bold tracking-widest uppercase mb-2 text-sm" style="color: var(--maroon);">✦ Kesimpulan ✦</p>
+                    <h2 class="display-font font-bold leading-tight mb-4 text-3xl" style="color: var(--ink);">
+                        Hidup Rukun dalam Perbedaan
+                    </h2>
+                    <p class="leading-relaxed mb-5 text-lg" style="color: var(--ink); opacity: 0.85;">
+                        Toleransi bukan berarti mencampurkan keyakinan, melainkan menghormati
+                        hak setiap orang untuk menjalankan keyakinannya. Dengan sikap saling
+                        menghargai, kita dapat menjaga kedamaian dan memelihara kehidupan
+                        bersama.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="rounded-full px-4 py-2 font-bold bg-white" style="color: var(--teal);">Beriman</span>
+                        <span class="rounded-full px-4 py-2 font-bold" style="background: #fff3d9; color: #9d6907;">Menghargai</span>
+                        <span class="rounded-full px-4 py-2 font-bold bg-white" style="color: var(--teal);">Hidup Rukun</span>
+                    </div>
+                </div>
+ 
+                <div class="relative reveal" style="transition-delay: 0.1s;">
+                    <div class="rounded-3xl p-3" style="background: var(--sand-deep);">
+                        <img loading="lazy" class="rounded-2xl w-full h-64 object-cover"
+                            src="img/posterrangkuman.jpg"
+                            alt="Pemandangan udara pedesaan Bali yang hijau dengan Gunung Agung saat matahari terbit">
+                    </div>
+                </div>
+ 
+            </div>
+        </section>
+ 
+    </main>
+ 
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+    <footer class="py-7" style="background: #082a24;">
+        <div class="max-w-6xl mx-auto px-5 flex flex-col md:flex-row items-center justify-between gap-2">
+            <p class="font-semibold text-center md:text-left text-[#eef4ef]">
+                Materi Belajar PAI • Toleransi, Kerukunan, dan Memelihara Kehidupan Manusia
+            </p>
+            <p class="text-sm text-[#b7d5cf]">© 2026 Masniatul</p>
+        </div>
+    </footer>
+ 
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            lucide.createIcons();
+ 
+            // Scroll reveal
+            const revealEls = document.querySelectorAll(".reveal");
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("in-view");
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+            revealEls.forEach((el) => io.observe(el));
+ 
+            // Balance beam gentle tilt animation
+            const beam = document.getElementById("beam");
+            if (beam && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+                let tilted = false;
+                setInterval(() => {
+                    tilted = !tilted;
+                    beam.style.transform = tilted ? "rotate(2.5deg)" : "rotate(-2.5deg)";
+                }, 3000);
+            }
+ 
+            // Quiz logic
+            const form = document.getElementById("quiz-form");
+            const correct = document.getElementById("quiz-correct");
+            const wrong = document.getElementById("quiz-wrong");
+            const retry = document.getElementById("retry-button");
+
+            form.addEventListener("submit", (event) => {
+
+                event.preventDefault();
+
+                // Ambil jawaban dari 3 soal
+                const answer1 = form.querySelector('input[name="answer1"]:checked');
+                const answer2 = form.querySelector('input[name="answer2"]:checked');
+                const answer3 = form.querySelector('input[name="answer3"]:checked');
+
+                // Kalau belum semua dijawab
+                if (!answer1 || !answer2 || !answer3) {
+                    alert("Yuk, jawab semua soal terlebih dahulu! 😊");
+                    return;
+                }
+
+                // Kunci jawaban:
+                // Soal 1 = B
+                // Soal 2 = A
+                // Soal 3 = C
+
+                const isCorrect =
+                    answer1.value === "b" &&
+                    answer2.value === "a" &&
+                    answer3.value === "c";
+
+                // Tampilkan hasil
+                correct.classList.toggle("hidden", !isCorrect);
+                wrong.classList.toggle("hidden", isCorrect);
+
+            });
+
+            retry.addEventListener("click", () => {
+
+                form.reset();
+
+                correct.classList.add("hidden");
+                wrong.classList.add("hidden");
+
+            });
+        });
+
+        // Aktivitas form submission
+        const aktivitasForm = document.getElementById("kirim-aktivitas");
+        const statusForm = document.getElementById("aktivitas-success");
+
+        aktivitasForm.addEventListener("click", async () => {
+
+            // e.preventDefault();
+
+            const data = {
+                nama: document.getElementById("nama").value,
+                kelas: document.getElementById("kelas").value,
+                hasil: document.getElementById("jawaban").value
+            };
+
+            statusForm.classList.remove("hidden");
+
+            statusForm.style.background = "#fff3d9";
+            statusForm.style.color = "#9d6907";
+
+            statusForm.textContent = "⏳ Sedang mengirim hasil aktivitas...";
+
+            try {
+
+                await fetch(
+                    "https://script.google.com/macros/s/AKfycbw2BY46IVXjqUt6i1fSaWkX8f-RwLO5sjuNrF03LP5x_QhHQfW3Zk3mB1YyskPmTSMU/exec",
+                    {
+                        method: "POST",
+                        mode: "no-cors",
+                        headers: {
+                            "Content-Type": "text/plain;charset=utf-8"
+                        },
+                        body: JSON.stringify(data)
+                    }
+                );
+
+                statusForm.style.background = "#dcf3e7";
+                statusForm.style.color = "#176d6d";
+
+                statusForm.textContent =
+                    "✓ Hasil aktivitas berhasil dikirim!";
+
+                document.getElementById("nama").value = "";
+                document.getElementById("kelas").value = "";
+                document.getElementById("jawaban").value = "";
+
+            } catch (error) {
+
+                statusForm.style.background = "#fff0e8";
+                statusForm.style.color = "#a94731";
+
+                statusForm.textContent =
+                    "✕ Terjadi kesalahan. Silakan coba lagi.";
+
+            }
+
+        });
+    </script>
+ 
+</body>
+</html>

@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+    <title>Materi 1 — Toleransi | Belajar PAI</title>
+ 
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+ 
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+ 
+    <style>
+        :root {
+            --ink: #1c332e;
+            --teal: #0e6659;
+            --teal-deep: #0a4a41;
+            --maroon: #8a3a2b;
+            --gold: #bf8a28;
+            --sand: #f4efdf;
+            --sand-deep: #e9dfc0;
+            --paper: #faf7ec;
+        }
+ 
+        html { scroll-behavior: smooth; }
+ 
+        body {
+            margin: 0;
+            font-family: "Inter", sans-serif;
+            color: var(--ink);
+            background: var(--paper);
+            overflow-x: hidden;
+        }
+ 
+        .display-font { font-family: "Amiri", serif; }
+ 
+        .star-field {
+            background-color: var(--sand);
+            background-image: radial-gradient(circle at 1px 1px, rgba(14,102,89,0.16) 1.4px, transparent 1.4px);
+            background-size: 26px 26px;
+        }
+ 
+        .ornament {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+ 
+        .lesson-card {
+            box-shadow: 0 10px 24px rgba(28,51,46,0.10);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .lesson-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 30px rgba(28,51,46,0.16);
+        }
+ 
+        .divider-motif {
+            height: 3px;
+            background: repeating-linear-gradient(90deg, var(--gold) 0 10px, transparent 10px 20px);
+            opacity: 0.6;
+        }
+ 
+        .badge-ring {
+            box-shadow: 0 0 0 5px rgba(191,138,40,0.18);
+        }
+ 
+        .num-watermark {
+            font-family: "Amiri", serif;
+            font-weight: 700;
+            color: var(--ink);
+            opacity: 0.06;
+            line-height: 1;
+            pointer-events: none;
+            user-select: none;
+        }
+ 
+        .activity-option { transition: all 0.2s ease; }
+        .activity-option:hover {
+            transform: translateY(-2px);
+            border-color: var(--teal);
+            background: #f1f8f4;
+        }
+        .activity-option.selected {
+            border-color: var(--teal);
+            background: #e3f0e6;
+        }
+        .activity-option.wrong {
+            border-color: var(--maroon);
+            background: #fbe9e2;
+        }
+ 
+        .reveal {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.in-view { opacity: 1; transform: translateY(0); }
+ 
+        :focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+ 
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { transition: none; opacity: 1; transform: none; }
+        }
+    </style>
+</head>
+ 
+<body>
+ 
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
+    <header class="sticky top-0 z-30 border-b border-white/10" style="background: var(--teal-deep);">
+        <nav class="max-w-6xl mx-auto px-5 py-3 flex items-center justify-between gap-4" aria-label="Navigasi utama">
+            <a href="index.html" class="flex items-center gap-2">
+                <span class="w-9 h-9 rounded-full grid place-items-center" style="background: var(--gold); color: var(--teal-deep);">
+                    <img src="img/logogandhi.jpg" alt="Logo Belajar PAI" class="w-full h-full object-contain rounded-full">
+                </span>
+                <span class="font-bold text-white text-base display-font">SMK Gandhi Usada Bali</span>
+            </a>
+ 
+            <div class="hidden lg:flex items-center gap-5 text-sm font-semibold">
+                <a href="index.html#beranda" class="text-white/90 hover:text-[var(--gold)] transition">Beranda</a>
+                <a href="index.html#materi" style="color: var(--gold);">Materi Pembelajaran</a>
+                <a href="index.html#aktivitas" class="text-white/90 hover:text-[var(--gold)] transition">Aktivitas</a>
+                <a href="index.html#evaluasi" class="text-white/90 hover:text-[var(--gold)] transition">Evaluasi</a>
+                <a href="index.html#kesimpulan" class="text-white/90 hover:text-[var(--gold)] transition">Kesimpulan</a>
+            </div>
+ 
+            <a href="index.html#materi" class="rounded-full px-4 py-2 font-bold hover:-translate-y-0.5 transition bg-white text-sm" style="background: var(--gold); color: white;">
+                ← Kembali
+            </a>
+
+        </nav>
+    </header>
+ 
+ 
+    <main>
+ 
+        <!-- =====================================================
+             HERO MATERI
+        ====================================================== -->
+        <section class="star-field relative overflow-hidden">
+ 
+            <span class="ornament -left-20 top-16 h-48 w-48 rounded-full" style="background: var(--gold); opacity: 0.35;"></span>
+            <span class="ornament right-8 top-12 h-28 w-28 rounded-full" style="border: 18px solid var(--sand-deep);"></span>
+ 
+            <div class="max-w-6xl mx-auto px-5 py-14 md:py-20 grid md:grid-cols-[1.1fr_.9fr] gap-10 items-center">
+ 
+                <div class="reveal in-view">
+ 
+                    <div class="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-5 bg-white shadow-sm font-bold" style="color: var(--teal);">
+                        <span class="badge-ring grid place-items-center w-7 h-7 rounded-full text-white text-sm" style="background: var(--teal);">01</span>
+                        Materi Pembelajaran
+                    </div>
+ 
+                    <h1 class="display-font font-bold leading-tight mb-5 text-4xl md:text-5xl" style="color: var(--ink);">
+                        Toleransi
+                    </h1>
+ 
+                    <p class="text-lg md:text-xl leading-relaxed max-w-2xl mb-4" style="color: var(--ink); opacity: 0.8;">
+                        Belajar memahami arti toleransi, pentingnya menghargai
+                        perbedaan, serta cara menerapkannya dalam kehidupan
+                        sehari-hari.
+                    </p>
+ 
+                    <div class="rounded-xl px-4 py-3 max-w-lg mb-6 text-sm font-semibold bg-white" style="color: var(--teal-deep); border-left: 4px solid var(--gold);">
+                        "Untukmu agamamu, dan untukku agamaku." — Q.S. Al-Kāfirūn: 6
+                    </div>
+ 
+                    <div class="flex flex-wrap gap-3">
+                        <a href="#pengertian" class="rounded-full px-5 py-3 font-bold text-white hover:-translate-y-0.5 transition shadow-lg" style="background: var(--teal);">
+                            Mulai Materi
+                        </a>
+                    </div>
+ 
+                </div>
+ 
+                <div class="relative reveal in-view" style="transition-delay: 0.1s;">
+                    <svg viewBox="0 0 320 300" class="w-full h-auto" role="img" aria-label="Ilustrasi dua lingkaran yang saling terhubung, melambangkan kebersamaan dalam perbedaan">
+                        <defs>
+                            <pattern id="dotpat" width="22" height="22" patternUnits="userSpaceOnUse">
+                                <circle cx="1.1" cy="1.1" r="1.1" fill="rgba(14,102,89,0.16)"/>
+                            </pattern>
+                        </defs>
+                        <rect x="0" y="0" width="320" height="300" fill="url(#dotpat)" opacity="0.5"/>
+ 
+                        <circle cx="130" cy="145" r="88" fill="none" stroke="var(--teal)" stroke-width="4" opacity="0.9"/>
+                        <circle cx="205" cy="145" r="88" fill="none" stroke="var(--gold)" stroke-width="4" opacity="0.9"/>
+ 
+                        <g stroke="var(--maroon)" stroke-width="3" fill="none" stroke-linecap="round">
+                            <path d="M150 130 q17 15 0 30" />
+                            <path d="M185 130 q-17 15 0 30" />
+                        </g>
+ 
+                        <text x="160" y="262" text-anchor="middle" class="display-font" font-size="19" font-weight="700" fill="var(--teal-deep)">Berbeda, Tetap Bersama</text>
+                    </svg>
+                </div>
+ 
+            </div>
+        </section>
+ 
+        <div class="divider-motif"></div>
+ 
+ 
+        <!-- =====================================================
+             PENGERTIAN
+        ====================================================== -->
+        <section id="pengertian" class="py-14" style="background: var(--paper);">
+            <div class="max-w-5xl mx-auto px-5">
+ 
+                <div class="grid md:grid-cols-[0.8fr_1.2fr] gap-8 items-center">
+ 
+                    <div class="relative reveal">
+                        <div class="rounded-3xl p-8 min-h-[290px] flex flex-col items-center justify-center text-center" style="background: var(--sand);">
+                            <div class="badge-ring w-20 h-20 rounded-full grid place-items-center text-white mb-5 shadow-lg" style="background: var(--teal);">
+                                <i data-lucide="heart-handshake" class="w-10 h-10"></i>
+                            </div>
+                            <h3 class="display-font font-bold text-2xl" style="color: var(--ink);">Menghargai Perbedaan</h3>
+                            <p class="mt-2" style="color: var(--ink); opacity: 0.7;">Berbeda bukan alasan untuk saling menjauh.</p>
+                        </div>
+                        <span class="absolute -right-2 top-3 text-4xl" style="color: var(--gold);">✦</span>
+                    </div>
+ 
+                    <div class="reveal" style="transition-delay: 0.1s;">
+                        <p class="font-bold tracking-widest uppercase mb-2 text-sm" style="color: var(--maroon);">✦ Bagian 01 ✦</p>
+                        <h2 class="display-font font-bold text-3xl mb-4" style="color: var(--ink);">Apa Itu Toleransi?</h2>
+                        <p class="text-lg leading-relaxed mb-4" style="color: var(--ink); opacity: 0.85;">
+                            Toleransi adalah sikap menghargai dan menghormati
+                            perbedaan yang dimiliki oleh orang lain, baik dalam
+                            keyakinan, pendapat, kebiasaan, maupun latar belakang.
+                        </p>
+                        <p class="text-lg leading-relaxed" style="color: var(--ink); opacity: 0.85;">
+                            Dalam kehidupan sehari-hari, toleransi berarti kita
+                            mampu hidup berdampingan dengan orang lain secara
+                            damai tanpa memaksakan kehendak dan tanpa merendahkan
+                            perbedaan yang ada.
+                        </p>
+                    </div>
+ 
+                </div>
+            </div>
+        </section>
+ 
+ 
+        <!-- =====================================================
+             TOLERANSI DALAM ISLAM
+        ====================================================== -->
+        <div class="divider-motif"></div>
+        <section class="py-14" style="background: var(--sand);">
+            <div class="max-w-5xl mx-auto px-5">
+ 
+                <div class="relative text-center max-w-2xl mx-auto mb-9 reveal">
+                    <div class="num-watermark absolute inset-x-0 -top-6 text-center text-8xl select-none">02</div>
+                    <p class="relative font-bold tracking-widest uppercase mb-2 text-sm" style="color: var(--maroon);">✦ Bagian 02 ✦</p>
+                    <h2 class="relative display-font font-bold text-3xl" style="color: var(--teal);">Toleransi dalam Islam</h2>
+                    <p class="mt-3 text-lg" style="color: var(--ink); opacity: 0.7;">
+                        Islam mengajarkan umatnya untuk menghargai perbedaan
+                        dan menjaga hubungan baik dengan sesama.
+                    </p>
+                </div>
+ 
+                <div class="grid md:grid-cols-3 gap-5">
+ 
+                    <article class="lesson-card reveal rounded-2xl bg-white p-6">
+                        <div class="w-12 h-12 rounded-xl grid place-items-center text-white mb-4" style="background: var(--teal);">
+                            <i data-lucide="heart" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-2 display-font" style="color: var(--ink);">Menghormati</h3>
+                        <p class="leading-relaxed" style="color: var(--ink); opacity: 0.75;">
+                            Menghormati orang lain meskipun memiliki perbedaan
+                            keyakinan, pendapat, atau kebiasaan.
+                        </p>
+                    </article>
+ 
+                    <article class="lesson-card reveal rounded-2xl bg-white p-6" style="transition-delay: 0.1s;">
+                        <div class="w-12 h-12 rounded-xl grid place-items-center text-white mb-4" style="background: var(--maroon);">
+                            <i data-lucide="users" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-2 display-font" style="color: var(--ink);">Hidup Berdampingan</h3>
+                        <p class="leading-relaxed" style="color: var(--ink); opacity: 0.75;">
+                            Membangun hubungan yang baik dan hidup rukun tanpa
+                            menjadikan perbedaan sebagai sumber konflik.
+                        </p>
+                    </article>
+ 
+                    <article class="lesson-card reveal rounded-2xl bg-white p-6" style="transition-delay: 0.2s;">
+                        <div class="w-12 h-12 rounded-xl grid place-items-center text-white mb-4" style="background: var(--gold);">
+                            <i data-lucide="shield-check" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-2 display-font" style="color: var(--ink);">Tanpa Paksaan</h3>
+                        <p class="leading-relaxed" style="color: var(--ink); opacity: 0.75;">
+                            Tidak memaksakan keyakinan atau kehendak kepada
+                            orang lain.
+                        </p>
+                    </article>
+ 
+                </div>
+            </div>
+        </section>
+ 
+ 
+        <!-- =====================================================
+             CONTOH KEHIDUPAN
+        ====================================================== -->
+        <section class="py-14" style="background: var(--paper);">
+            <div class="max-w-5xl mx-auto px-5">
+ 
+                <div class="relative text-center max-w-2xl mx-auto mb-9 reveal">
+                    <div class="num-watermark absolute inset-x-0 -top-6 text-center text-8xl select-none">03</div>
+                    <p class="relative font-bold tracking-widest uppercase mb-2 text-sm" style="color: var(--maroon);">✦ Bagian 03 ✦</p>
+                    <h2 class="relative display-font font-bold text-3xl" style="color: var(--ink);">Contoh Toleransi dalam Kehidupan</h2>
+                    <p class="mt-3 text-lg" style="color: var(--ink); opacity: 0.7;">
+                        Toleransi dapat dimulai dari tindakan sederhana di
+                        lingkungan sekitar kita.
+                    </p>
+                </div>
+ 
+                <div class="grid md:grid-cols-2 gap-5">
+ 
+                    <div class="reveal rounded-2xl bg-white p-6 shadow-sm" style="border-left: 4px solid var(--teal);">
+                        <div class="flex gap-4">
+                            <span class="shrink-0 w-11 h-11 rounded-full grid place-items-center font-bold" style="background: #e3f0e6; color: var(--teal);">01</span>
+                            <div>
+                                <h3 class="font-bold text-xl mb-1" style="color: var(--ink);">Menghargai teman yang berbeda</h3>
+                                <p class="leading-relaxed" style="color: var(--ink); opacity: 0.75;">
+                                    Tetap berteman dan bekerja sama meskipun
+                                    memiliki latar belakang atau keyakinan
+                                    yang berbeda.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+ 
+                    <div class="reveal rounded-2xl bg-white p-6 shadow-sm" style="border-left: 4px solid var(--maroon); transition-delay: 0.1s;">
+                        <div class="flex gap-4">
+                            <span class="shrink-0 w-11 h-11 rounded-full grid place-items-center font-bold" style="background: #fbe9e2; color: var(--maroon);">02</span>
+                            <div>
+                                <h3 class="font-bold text-xl mb-1" style="color: var(--ink);">Menghormati waktu ibadah</h3>
+                                <p class="leading-relaxed" style="color: var(--ink); opacity: 0.75;">
+                                    Memberikan kesempatan kepada orang lain
+                                    untuk menjalankan ibadahnya dengan tenang.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+ 
+                    <div class="reveal rounded-2xl bg-white p-6 shadow-sm" style="border-left: 4px solid var(--gold);">
+                        <div class="flex gap-4">
+                            <span class="shrink-0 w-11 h-11 rounded-full grid place-items-center font-bold" style="background: #fff3d9; color: #9d6907;">03</span>
+                            <div>
+                                <h3 class="font-bold text-xl mb-1" style="color: var(--ink);">Mendengarkan pendapat</h3>
+                                <p class="leading-relaxed" style="color: var(--ink); opacity: 0.75;">
+                                    Mendengarkan pendapat teman dengan santun
+                                    tanpa langsung mengejek atau merendahkan.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+ 
+                    <div class="reveal rounded-2xl bg-white p-6 shadow-sm" style="border-left: 4px solid #c4693f; transition-delay: 0.1s;">
+                        <div class="flex gap-4">
+                            <span class="shrink-0 w-11 h-11 rounded-full grid place-items-center font-bold" style="background: #fbe9e2; color: #a94731;">04</span>
+                            <div>
+                                <h3 class="font-bold text-xl mb-1" style="color: var(--ink);">Tidak memaksakan kehendak</h3>
+                                <p class="leading-relaxed" style="color: var(--ink); opacity: 0.75;">
+                                    Menyampaikan pendapat dengan baik tanpa
+                                    memaksa orang lain untuk selalu setuju.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+ 
+                </div>
+            </div>
+        </section>
+ 
+ 
+        <!-- =====================================================
+             BATASAN TOLERANSI
+        ====================================================== -->
+        <section class="py-14" style="background: var(--teal-deep);">
+            <div class="max-w-5xl mx-auto px-5">
+ 
+                <div class="grid md:grid-cols-[1fr_1fr] gap-8 items-center">
+ 
+                    <div class="reveal">
+                        <p class="font-bold tracking-widest uppercase mb-2 text-sm" style="color: var(--gold);">✦ Bagian 04 ✦</p>
+                        <h2 class="display-font font-bold text-white text-3xl mb-4">
+                            Apakah Toleransi Berarti Harus Mengikuti Semua Hal?
+                        </h2>
+                        <p class="text-lg leading-relaxed text-white/85">
+                            Tidak. Toleransi berarti menghargai hak orang lain
+                            untuk memiliki keyakinan dan menjalankan kehidupannya.
+                            Kita tetap dapat menghormati orang lain tanpa harus
+                            meninggalkan keyakinan atau prinsip yang kita pegang.
+                        </p>
+                    </div>
+ 
+                    <div class="reveal rounded-3xl bg-white p-6 md:p-8 relative overflow-hidden" style="transition-delay: 0.1s;">
+                        <span class="absolute -right-6 -bottom-6 w-28 h-28 rounded-full" style="background: var(--sand-deep); opacity: 0.6;"></span>
+                        <div class="relative flex items-start gap-4 mb-5">
+                            <span class="badge-ring w-12 h-12 shrink-0 rounded-full grid place-items-center" style="background: var(--gold); color: var(--teal-deep);">
+                                <i data-lucide="lightbulb" class="w-6 h-6"></i>
+                            </span>
+                            <div>
+                                <h3 class="font-bold text-xl display-font" style="color: var(--ink);">Ingat!</h3>
+                                <p class="mt-1" style="color: var(--ink); opacity: 0.7;">Toleransi memiliki sikap yang seimbang.</p>
+                            </div>
+                        </div>
+ 
+                        <div class="space-y-3">
+                            <div class="flex gap-3 items-start">
+                                <span class="font-bold" style="color: var(--teal);">✓</span>
+                                <p style="color: var(--ink); opacity: 0.85;">Menghargai perbedaan.</p>
+                            </div>
+                            <div class="flex gap-3 items-start">
+                                <span class="font-bold" style="color: var(--teal);">✓</span>
+                                <p style="color: var(--ink); opacity: 0.85;">Tidak memaksakan keyakinan.</p>
+                            </div>
+                            <div class="flex gap-3 items-start">
+                                <span class="font-bold" style="color: var(--teal);">✓</span>
+                                <p style="color: var(--ink); opacity: 0.85;">Tetap teguh pada keyakinan sendiri.</p>
+                            </div>
+                            <div class="flex gap-3 items-start">
+                                <span class="font-bold" style="color: var(--maroon);">✕</span>
+                                <p style="color: var(--ink); opacity: 0.85;">Bukan berarti mencampuradukkan keyakinan.</p>
+                            </div>
+                        </div>
+                    </div>
+ 
+                </div>
+            </div>
+        </section>
+ 
+ 
+        <!-- =====================================================
+             CEK PEMAHAMAN
+        ====================================================== -->
+        <section class="py-16" style="background: var(--sand);">
+            <div class="max-w-3xl mx-auto px-5">
+ 
+                <div class="text-center mb-7 reveal">
+                    <p class="font-bold tracking-widest uppercase mb-2 text-sm" style="color: var(--maroon);">✦ Cek Pemahaman ✦</p>
+                    <h2 class="display-font font-bold text-3xl" style="color: var(--teal);">Yuk, Coba Jawab!</h2>
+                    <p class="mt-2" style="color: var(--ink); opacity: 0.7;">Pilih jawaban yang menurutmu paling tepat.</p>
+                </div>
+ 
+                <div class="reveal rounded-3xl bg-white p-6 md:p-8 shadow-xl">
+ 
+                    <h3 class="font-bold text-xl leading-snug mb-5" style="color: var(--ink);">
+                        Rani memiliki teman yang berbeda keyakinan. Sikap yang
+                        menunjukkan toleransi adalah ...
+                    </h3>
+ 
+                    <div id="question-options" class="space-y-3">
+ 
+                        <button type="button" class="activity-option w-full text-left rounded-xl border-2 border-slate-200 p-4" style="color: var(--ink);" data-answer="wrong">
+                            Menghindari temannya agar tidak terjadi perbedaan.
+                        </button>
+ 
+                        <button type="button" class="activity-option w-full text-left rounded-xl border-2 border-slate-200 p-4" style="color: var(--ink);" data-answer="correct">
+                            Menghormati keyakinannya dan tetap berteman dengan baik.
+                        </button>
+ 
+                        <button type="button" class="activity-option w-full text-left rounded-xl border-2 border-slate-200 p-4" style="color: var(--ink);" data-answer="wrong">
+                            Meminta temannya mengikuti keyakinannya.
+                        </button>
+ 
+                    </div>
+ 
+                    <div id="answer-feedback" class="hidden mt-5 rounded-xl p-4 font-bold" aria-live="polite"></div>
+ 
+                </div>
+ 
+            </div>
+        </section>
+ 
+ 
+        <!-- =====================================================
+             REFLEKSI
+        ====================================================== -->
+        <section class="star-field py-14">
+            <div class="max-w-4xl mx-auto px-5">
+ 
+                <div class="reveal rounded-3xl bg-white p-7 md:p-10 shadow-xl relative overflow-hidden">
+                    <span class="absolute -right-8 -top-8 w-32 h-32 rounded-full" style="background: var(--gold); opacity: 0.3;"></span>
+ 
+                    <div class="relative">
+                        <p class="font-bold tracking-widest uppercase mb-2 text-sm" style="color: var(--maroon);">✦ Refleksi ✦</p>
+                        <h2 class="display-font font-bold text-3xl mb-4" style="color: var(--ink);">Sudahkah Aku Bersikap Toleran?</h2>
+                        <p class="text-lg leading-relaxed mb-6" style="color: var(--ink); opacity: 0.85;">
+                            Coba pikirkan satu perbedaan yang pernah kamu temui
+                            di sekolah, keluarga, atau lingkungan sekitar.
+                            Bagaimana sikapmu terhadap perbedaan tersebut?
+                        </p>
+ 
+                        <div class="grid sm:grid-cols-3 gap-3">
+ 
+                            <div class="rounded-2xl p-4" style="background: #e3f0e6;">
+                                <div class="text-2xl mb-2">👂</div>
+                                <h3 class="font-bold" style="color: var(--teal);">Mau Mendengar</h3>
+                                <p class="text-sm mt-1" style="color: var(--ink); opacity: 0.7;">Dengarkan orang lain dengan terbuka.</p>
+                            </div>
+ 
+                            <div class="rounded-2xl p-4" style="background: #fff3d9;">
+                                <div class="text-2xl mb-2">🤝</div>
+                                <h3 class="font-bold" style="color: #9d6907;">Mau Menghargai</h3>
+                                <p class="text-sm mt-1" style="color: var(--ink); opacity: 0.7;">Hargai perbedaan yang ada.</p>
+                            </div>
+ 
+                            <div class="rounded-2xl p-4" style="background: #fbe9e2;">
+                                <div class="text-2xl mb-2">💬</div>
+                                <h3 class="font-bold" style="color: var(--maroon);">Bicara Santun</h3>
+                                <p class="text-sm mt-1" style="color: var(--ink); opacity: 0.7;">Sampaikan pendapat tanpa merendahkan.</p>
+                            </div>
+ 
+                        </div>
+ 
+                    </div>
+                </div>
+            </div>
+        </section>
+ 
+ 
+        <!-- =====================================================
+             RANGKUMAN
+        ====================================================== -->
+        <section class="py-14" style="background: var(--paper);">
+            <div class="max-w-4xl mx-auto px-5">
+ 
+                <div class="text-center mb-7 reveal">
+                    <p class="font-bold tracking-widest uppercase mb-2 text-sm" style="color: var(--maroon);">✦ Rangkuman ✦</p>
+                    <h2 class="display-font font-bold text-3xl" style="color: var(--ink);">Inti Materi Toleransi</h2>
+                </div>
+ 
+                <div class="grid md:grid-cols-3 gap-5">
+ 
+                    <div class="reveal rounded-2xl bg-white p-6 shadow-sm text-center">
+                        <div class="text-3xl mb-3">🌱</div>
+                        <h3 class="font-bold text-lg mb-2 display-font" style="color: var(--teal);">Menghargai</h3>
+                        <p style="color: var(--ink); opacity: 0.75;">Menghormati perbedaan yang ada di sekitar kita.</p>
+                    </div>
+ 
+                    <div class="reveal rounded-2xl bg-white p-6 shadow-sm text-center" style="transition-delay: 0.1s;">
+                        <div class="text-3xl mb-3">🤝</div>
+                        <h3 class="font-bold text-lg mb-2 display-font" style="color: var(--maroon);">Hidup Rukun</h3>
+                        <p style="color: var(--ink); opacity: 0.75;">Menjaga hubungan baik meskipun memiliki perbedaan.</p>
+                    </div>
+ 
+                    <div class="reveal rounded-2xl bg-white p-6 shadow-sm text-center" style="transition-delay: 0.2s;">
+                        <div class="text-3xl mb-3">🕊️</div>
+                        <h3 class="font-bold text-lg mb-2 display-font" style="color: #9d6907;">Tanpa Paksaan</h3>
+                        <p style="color: var(--ink); opacity: 0.75;">Tidak memaksakan keyakinan dan kehendak kepada orang lain.</p>
+                    </div>
+ 
+                </div>
+ 
+                <div class="flex flex-wrap justify-center gap-3 mt-10 reveal">
+                    <a href="qs.yunus.html" class="rounded-full px-5 py-3 font-bold text-white hover:-translate-y-0.5 transition" style="background: var(--teal);">
+                        Materi Selanjutnya →
+                    </a>
+                </div>
+ 
+            </div>
+        </section>
+ 
+    </main>
+ 
+ 
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+    <footer class="py-7" style="background: #082a24;">
+        <div class="max-w-6xl mx-auto px-5 flex flex-col md:flex-row items-center justify-between gap-2">
+            <p class="font-semibold text-center md:text-left text-[#eef4ef]">Materi Belajar PAI • Toleransi</p>
+            <p class="text-sm text-[#b7d5cf]">© 2026 Masniatul</p>
+        </div>
+    </footer>
+ 
+ 
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+ 
+            lucide.createIcons();
+ 
+            // Scroll reveal
+            const revealEls = document.querySelectorAll(".reveal:not(.in-view)");
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("in-view");
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+            revealEls.forEach((el) => io.observe(el));
+ 
+            // Cek pemahaman quiz
+            const options = document.querySelectorAll(".activity-option");
+            const feedback = document.getElementById("answer-feedback");
+ 
+            options.forEach((option) => {
+                option.addEventListener("click", () => {
+ 
+                    options.forEach((item) => {
+                        item.classList.remove("selected", "wrong");
+                    });
+ 
+                    const isCorrect = option.dataset.answer === "correct";
+ 
+                    if (isCorrect) {
+                        option.classList.add("selected");
+                        feedback.className = "mt-5 rounded-xl p-4 font-bold";
+                        feedback.style.background = "#dcf3e7";
+                        feedback.style.color = "#0a4a41";
+                        feedback.textContent =
+                            "✓ Benar! Toleransi berarti menghormati keyakinan dan perbedaan orang lain tanpa memaksakan kehendak.";
+                    } else {
+                        option.classList.add("wrong");
+                        feedback.className = "mt-5 rounded-xl p-4 font-bold";
+                        feedback.style.background = "#fbe9e2";
+                        feedback.style.color = "#8a3a2b";
+                        feedback.textContent =
+                            "Belum tepat. Toleransi bukan berarti menjauhi atau memaksa orang lain. Coba pilih jawaban yang lebih tepat.";
+                    }
+ 
+                    feedback.classList.remove("hidden");
+                });
+            });
+ 
+        });
+    </script>
+ 
+</body>
+</html>
